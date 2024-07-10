@@ -23,7 +23,7 @@
         @include('dashincludes.topnav')
 
         <!-- /top navigation -->
-
+          @yield('pagecontent')
         <!-- page content -->
         @include('dashincludes.pagecontent')
         <!-- /page content -->

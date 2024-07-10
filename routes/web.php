@@ -11,5 +11,10 @@ Route::get('user', function () {
 });
 
 Route::get('cat', function () {
-    return view('test2');
+    return view('cate');
+});
+
+
+Route::get('add', function () {
+    return view('adduser');
 });
