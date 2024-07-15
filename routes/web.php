@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\DrinkController;
 use App\Http\Controllers\categoryController;
 Route::get('/', function () {
-    return view('test1');
+    return view('welcome');
 });
 
 Route::get('user', function () {
@@ -33,3 +33,7 @@ Route::get('add', function () {
         Route::get('addcate',[categoryController::class, 'create'])->name('addcate');
         Route::post('insertcate', [categoryController::class, 'store'])->name('insertcate');
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
