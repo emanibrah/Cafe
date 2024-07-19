@@ -61,15 +61,29 @@
 
 
                       <tbody>
+                      @foreach($drinks as $drink)   
                         <tr>
-                          <td>1 Jan 2023</td>
-                          <td>Title</td>
-                          <td>Yes</td>
-                          <td><img src="{{ asset('dashassets/./images/edit.png') }}" alt="Edit"></td>
-                          <td><img src="{{ asset('dashassets/./images/delete.png') }}" alt="Delete"></td>
+                          <td>{{ $drink->created_at->format('d M Y') }}</td>
+                          <td>{{$drink->title}}</td>
+                          <td>{{ $drink->publish ? 'No' : 'Yes' }}</td>
+                          <td>
+                          <a href="{{ route('editDrink', $drink->id) }}">
+                              <img src="{{ asset('dashassets/images/edit.png') }}" alt="Edit">
+                          </a>
+                      </td>
+                      <td>
+                <form action="{{ route('deleteDrink', $drink->id) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" style="border:  none; background: none; padding: 0;" value="Delete" onclick="return confirm('Are you sure you want to delete this beverage?')"  >
+                        <img src="{{ asset('dashassets/images/delete.png') }}" alt="Delete">
+                    </button>
+                </form>
+            </td>
                         </tr>
-                       
+                        @endforeach
                       </tbody>
+
                     </table>
                   </div>
                   </div>

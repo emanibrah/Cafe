@@ -14,7 +14,7 @@ class Drink extends Model
         'title',
         'content',
         'price',
-        'puplish',
+        'publish',
         'special',
         'image',
         'category_id',

@@ -59,17 +59,38 @@
 
 
                       <tbody>
+                      @foreach($categories as $category)
                         <tr>
-                          <td>Category</td>
-                          <td><img src="{{ asset('dashassets/./images/edit.png') }}" alt="Edit"></td>
-                          <td><img src="{{ asset('dashassets/./images/delete.png') }}" alt="Delete"></td>
+                          <td>{{$category->cate_name}}</td>
+                          <td>
+                          <a href="{{ route('editcate', $category->id) }}">
+                              <img src="{{ asset('dashassets/images/edit.png') }}" alt="Edit">
+                          </a>
+                      </td>
+                      <td>
+                       <form action="{{ route('deletecate', $category->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                         @method('DELETE')
+                    <button type="submit" style="border:  none; background: none; padding: 0;" value="Delete" onclick="return confirm('Are you sure you want to delete this category?')"  >
+                        <img src="{{ asset('dashassets/images/delete.png') }}" alt="Delete">
+                    </button>
                         </tr>
-                        <tr>
-                          <td>Category</td>
-                          <td><img src="{{ asset('dashassets/./images/edit.png') }}" alt="Edit"></td>
-                          <td><img src="{{ asset('dashassets/./images/delete.png') }}" alt="Delete"></td>
-                        </tr>
-                        
+                        <!-- <tr>
+                          <td>{{$category->cate_name}}</td>
+                          <a href="{{ route('editcate', $category->id) }}">
+                          <img src="{{ asset('dashassets/images/edit.png') }}" alt="Edit"></a>
+                           </td>
+                         <td>
+                       <form action="{{ route('deletecate', $category->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                         @method('DELETE')
+                    <button type="submit" style="border:  none; background: none; padding: 0;" value="Delete" onclick="return confirm('Are you sure you want to delete this category?')"  >
+                        <img src="{{ asset('dashassets/images/delete.png') }}" alt="Delete">
+                    </button>
+                        </tr> -->
+
+                        @endforeach
+        
                       </tbody>
                     </table>
                   </div>

@@ -49,15 +49,22 @@ class categoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $categories= Category::findOrFail($id);
+        return view('editcate', compact( 'categories'));
     }
+    
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data= $request->validate([
+            'cate_name'=>'required|string|max:50',
+        ]);
+        Category::where('id', $id)->update($data);
+        return redirect('categories');
+
     }
 
     /**
@@ -65,6 +72,21 @@ class categoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // قم بالبحث عن الفئة بناءً على الـ ID وحذفها بشكل دائم
+        $category = Category::find($id);
+        
+        if (!$category) {
+            return redirect('cate')->with('error', 'Category not found');
+        }
+        
+        // تأكد من أن الفئة ليست لها علاقات قبل حذفها بشكل دائم
+        if ($category->drinks()->count() > 0) {
+            return redirect('cate')->with('error', 'Category has related drinks, cannot be deleted');
+        }
+    
+        $category->forceDelete();
+    
+        return redirect('cate')->with('success', 'Category deleted successfully');
     }
+    
 }

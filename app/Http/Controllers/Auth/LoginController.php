@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 class LoginController extends Controller
 {
     /*
@@ -25,6 +26,7 @@ class LoginController extends Controller
      *
      * @var string
      */
+    protected $title;
     protected $redirectTo = '/home';
 
     /**
@@ -36,5 +38,30 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
         $this->middleware('auth')->only('logout');
+        $this->title = 'Login Page';
+    }
+
+    public function showLoginForm()
+    {
+        return view('auth.login', ['title' => $this->title]);
+    }
+
+    public function login(Request $request)
+    {
+       # Validate the form data
+        $request->validate([
+            //'email' => 'required|email',
+            'name' => 'required|string|max:255',
+            'password' => 'required|string|min:8',
+            
+        ]);
+
+        # Attempt to log thenamein
+        if (Auth::attempt(['name' => $request->name, 'password' => $request->password], $request->remember)) {
+            return redirect()->intended(route('home'));
+         } else {
+        
+        return back()->withErrors(['name' => 'These credentials do not match our records.'])->withInput($request->only('name', 'remember'));
+        }
     }
 }

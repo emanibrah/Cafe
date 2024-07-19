@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title', 100);
             $table->longText('content');
             $table->integer('price');
-            $table->boolean('puplish');
+            $table->boolean('publish')->default(false);
             $table->boolean('special');
             $table->string('image', 100);
             $table->foreignId('category_id')->constrained('categories')->onDelete('restrict');

@@ -25,9 +25,7 @@
         <!-- /top navigation -->
           @yield('pagecontent')
         <!-- page content -->
-        @include('dashincludes.pagecontent')
-        <!-- /page content -->
-
+      
         <!-- footer content -->
         @include('dashincludes.footer')
 

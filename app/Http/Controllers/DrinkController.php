@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Drink;
+use App\Models\Category;
 use App\Traits\UploadFile;
 
 class DrinkController extends Controller
@@ -23,7 +24,8 @@ class DrinkController extends Controller
      */
     public function create()
     {
-        //
+        $categories =Category::get();
+        return view('addDrink', compact('categories'));
     }
 
     /**
@@ -31,7 +33,32 @@ class DrinkController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $data= $request->validate([
+            'title'=>'required|string|max:50',
+            'content'=>'required',
+            'price'=>'required',
+            'image' => 'required',
+            'category_id'=>'required', 
+                ]);
+       // return dd($request->all());
+        // 
+            // 'price'=>'required', 
+            // 'image' => 'required',
+            // 'category_id'=>'required', 
+       
+
+        $fileName = $this->uploadFile($request->image, 'assets/img');    
+        $data['image'] = $fileName;
+        $data['publish'] = isset($request-> publish);
+        $data['special'] = isset($request-> special);
+        // $data['puplish'] = $request->has('active'); 
+        // $data['special'] = $request->has('special_active');
+        //return dd($request->all());
+
+        Drink::create ($data);
+        return redirect('drinkList');
+    
     }
 
     /**
@@ -39,7 +66,9 @@ class DrinkController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $drinks = Drink::findOrFail($id);
+        return view('drinkList', compact('drinks'));
+
     }
 
     /**
@@ -47,7 +76,9 @@ class DrinkController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $categories = Category::get();
+        $drinks= Drink::findOrFail($id);
+        return view('editDrink', compact('drinks', 'categories'));
     }
 
     /**
@@ -55,14 +86,32 @@ class DrinkController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->validate([
+            'title'=>'required|string|max:50',
+            'content'=>'required',
+            'price'=>'required',
+            'image' => 'required',
+            //'category_id'=>'required',
+                        ]);
+               
+        $fileName = $this->uploadFile($request->image, 'assets/img');    
+        $data['image'] = $fileName;
+        $data['publish'] = $request->has('active'); 
+        $data['special'] = $request->has('special_active');
+       
+        //return dd($request->all());
+       Drink::where('id', $id)->update($data);
+        return redirect('drinkList');
+
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        Drink::where('id', $id)->forceDelete();
+        return redirect('drinkList');
     }
 }

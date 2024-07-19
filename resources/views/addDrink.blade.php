@@ -46,21 +46,19 @@
 								</div>
 								<div class="x_content">
 									<br />
-									<form action=" {{ route('insertcate')}} "  method="post" enctype="multipart/form-data"  id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-									@csrf 	
+									<form action="{{route('insertdrink')}}" method="post" enctype="multipart/form-data">		
+										@csrf 	
 									<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="title">Title <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="title" required="required" class="form-control ">
+												<input type="text" id="title" required="required" class="form-control " name="title" >
 											</div>
 										</div>
 										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="content">Content <span class="required">*</span>
-											</label>
+										    <label class="col-form-label col-md-3 col-sm-3 label-align" for="content">Content <span class="required">*</span>											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<textarea id="content" name="content" required="required" class="form-control">Contents</textarea>
-											</div>
+											<textarea id="content" name="content" required="required" class="form-control">{{old('content')}}</textarea>											</div>
 										</div>
 										<div class="item form-group">
 											<label for="price" class="col-form-label col-md-3 col-sm-3 label-align">Price <span class="required">*</span></label>
@@ -72,7 +70,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align">Published</label>
 											<div class="checkbox">
 												<label>
-													<input type="checkbox" class="flat">
+													<input type="checkbox" class="flat" name="puplish" >
 												</label>
 											</div>
 										</div>
@@ -80,7 +78,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align">Special</label>
 											<div class="checkbox">
 												<label>
-													<input type="checkbox" class="flat">
+													<input type="checkbox" class="flat"name="special" >
 												</label>
 											</div>
 										</div>
@@ -88,7 +86,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="image">Image <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="file" id="image" name="image" required="required" class="form-control">
+												<input type="file" id="image"  required="required" class="form-control"name="image" >
 											</div>
 										</div>
 
@@ -96,10 +94,12 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="title">Category <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<select class="form-control" name="category" id="">
+												<select class="form-control" name="category_id" id="">
 													<option value=" ">Select Category</option>
-													<option value="cat1">Category 1</option>
-													<option value="cat2">Category 2</option>
+													@foreach($categories as $category)
+													<option value=" {{$category->id}}">{{$category->cate_name}}</option>
+													@endforeach
+								
 												</select>
 											</div>
 										</div>
