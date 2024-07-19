@@ -50,11 +50,13 @@ class DrinkController extends Controller
 
         $fileName = $this->uploadFile($request->image, 'assets/img');    
         $data['image'] = $fileName;
-        $data['publish'] = isset($request-> publish);
-        $data['special'] = isset($request-> special);
-        // $data['puplish'] = $request->has('active'); 
-        // $data['special'] = $request->has('special_active');
+        // $data['publish'] = isset($request-> active);
+        // $data['special'] = isset($request-> special);
+        // $data['puplish'] = $request->has('puplish'); 
+        // $data['special'] = $request->has('special');
         //return dd($request->all());
+        $data['publish'] = $request->has('active'); // This checks if 'active' checkbox is checked
+        $data['special'] = $request->has('special'); // This checks if 'special' checkbox is checked
 
         Drink::create ($data);
         return redirect('drinkList');
@@ -91,13 +93,15 @@ class DrinkController extends Controller
             'content'=>'required',
             'price'=>'required',
             'image' => 'required',
-            //'category_id'=>'required',
+            'category_id'=>'required', 
+           //'category_id' => 'required|exists:categories,id',
                         ]);
                
         $fileName = $this->uploadFile($request->image, 'assets/img');    
         $data['image'] = $fileName;
-        $data['publish'] = $request->has('active'); 
-        $data['special'] = $request->has('special_active');
+        $data['publish'] = $request->has('active'); // This checks if 'active' checkbox is checked
+        $data['special'] = $request->has('special'); // This checks if 'special' checkbox is checked
+
        
         //return dd($request->all());
        Drink::where('id', $id)->update($data);

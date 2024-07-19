@@ -76,7 +76,7 @@
         <label class="col-form-label col-md-3 col-sm-3 label-align">Published</label>
         <div class="checkbox">
             <label>
-                <input type="checkbox" name="published" class="flat" {{ $drinks->published ? 'checked' : '' }}>
+                <input type="checkbox" name="active" class="flat" {{ $drinks->active ? 'checked' : '' }}>
             </label>
         </div>
     </div>
@@ -100,14 +100,14 @@
     <div class="item form-group">
         <label class="col-form-label col-md-3 col-sm-3 label-align" for="category">Category <span class="required">*</span></label>
         <div class="col-md-6 col-sm-6">
-            <select class="form-control" name="category" id="category">
+            <select class="form-control" name="category_id" id="">
                 <option value="">Select Category</option>
-				@foreach($categories as $category)
+				<!-- @foreach($categories as $category)
 			<option value="{{ $category->id }}" @selected(old('id') == $category->category_id)>{{ $category->cate_name }}</option>
-						@endforeach
-                <!-- @foreach($categories as $category)
+						@endforeach -->
+                @foreach($categories as $category)
                     <option value="{{ $category->id }}" {{ $category->id == $drinks->category_id ? 'selected' : '' }}>{{ $category->cate_name }}</option>
-                @endforeach -->
+                @endforeach
             </select>
         </div>
     </div>

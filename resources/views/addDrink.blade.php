@@ -70,7 +70,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align">Published</label>
 											<div class="checkbox">
 												<label>
-													<input type="checkbox" class="flat" name="puplish" >
+													<input type="checkbox" class="flat" name="active" id=""  >
 												</label>
 											</div>
 										</div>
@@ -78,7 +78,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align">Special</label>
 											<div class="checkbox">
 												<label>
-													<input type="checkbox" class="flat"name="special" >
+													<input type="checkbox" class="flat"name="special" id=""  >
 												</label>
 											</div>
 										</div>

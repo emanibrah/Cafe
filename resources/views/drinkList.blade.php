@@ -65,7 +65,14 @@
                         <tr>
                           <td>{{ $drink->created_at->format('d M Y') }}</td>
                           <td>{{$drink->title}}</td>
-                          <td>{{ $drink->publish ? 'No' : 'Yes' }}</td>
+                          <td>  
+                        <!-- {{ $drink->publish ? 'No' : 'Yes' }} -->
+                        @if ($drink->publish)
+                            yes
+                            @else
+                            no
+                            @endif
+                        </td>
                           <td>
                           <a href="{{ route('editDrink', $drink->id) }}">
                               <img src="{{ asset('dashassets/images/edit.png') }}" alt="Edit">
