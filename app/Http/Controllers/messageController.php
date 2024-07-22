@@ -14,7 +14,8 @@ class messageController extends Controller
      */
     public function index()
     {
-       
+        $messages = Message::get();
+        return view ('messages', compact ('messages'));
     }
 
     /**
@@ -48,8 +49,11 @@ class messageController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $messages = Message::findOrFail($id);
+       
+        return view('showMsg', compact('messages'));
     }
+   
 
     /**
      * Show the form for editing the specified resource.
@@ -70,8 +74,9 @@ class messageController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id) 
     {
-        //
+        Message::where('id', $id)->forceDelete();
+        return redirect('message');
     }
 }

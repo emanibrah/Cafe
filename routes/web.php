@@ -53,14 +53,18 @@ Route::get('add', function () {
 
 
 //Messages
+        Route::get('message',[messageController::class, 'index'])->name('message');
         Route::post('uscontact', [messageController::class, 'store'])->name('uscontact');
         // Route::get('editDrink/{id}', [DrinkController::class, 'edit'])->name('editDrink');
         // Route::put('updateDrink/{id}', [DrinkController::class, 'update'])->name('updateDrink');
-        // Route::get('showclients/{id}', [DrinkController::class, 'show'])->name('showclients');
+        Route::get('showMsg/{id}', [messageController::class, 'show'])->name('showMsg');
+        Route::delete('deletemsg/{id}', [messageController::class, 'destroy'])->name('deletemsg');
 
 
 //pages
         Route::get('drinkMenu', [pageController::class, 'index'])->name('drinkMenu');
+        Route::get('drink/category/{categoryId}', [pageController::class, 'getDrinksByCategory'])->name('drink.category');
+
         Route::get('aboutus', [pageController::class, 'about'])->name('aboutus');
         Route::get('us', [PageController::class, 'contact'])->name('us');
         Route::get('specialDrink', [PageController::class, 'special'])->name('specialDrink');

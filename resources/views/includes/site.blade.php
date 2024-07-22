@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-@include('includes.head')
-</head>
-<body>
-  
-       <!-- Site Header -->
-       <div class="tm-container">
+<div class="tm-container">
     <div class="tm-row">
       <!-- Site Header -->
       <div class="tm-left">
@@ -18,7 +10,7 @@
           <nav class="tm-site-nav">
             <ul class="tm-site-nav-ul">
               <li class="tm-page-nav-item">
-                <a href="#drink" class="tm-page-link active">
+              <a href="{{ route('drinkMenu') }}" class="tm-page-link {{request()->is('drinkMenu')? "active":""}}">
                   <i class="fas fa-mug-hot tm-page-link-icon"></i>
                   <span>Drink Menu</span>
                 </a>
@@ -45,24 +37,3 @@
           </nav>
         </div>        
       </div>
-
-       <!-- Drink Menu Page -->
-      @include('includes.drinkmenu')
-
-
-        <!-- About Us Page -->
-           @include('includes.about')
-
-         >   <!-- Special Items Page -->
-         @include('includes.special')
-
-            <!-- Contact Page -->
-        @include('includes.contect') 
-
-          <!-- Background video -->
-          @include('includes.video')
-
-
-  </script>
-</body>
-</html>

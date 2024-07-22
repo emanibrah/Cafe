@@ -59,24 +59,25 @@
                       </thead>
                       <tbody>
                         <tr>
-                          <td>First Name and Last Name</td>
-                          <td>mail@example.com</td>
-                          <td><img src="{{ asset('dashassets/./images/edit.png') }}" alt="Edit"></td>
-                          <td><img src="{{ asset('dashassets/./images/delete.png') }}" alt="Delete"></td>
-                        </tr>
+                        @foreach($messages as $message)
                         <tr>
-                          <td>First Name and Last Name</td>
-                          <td>mail@example.com</td>
-                          <td><img src="{{ asset('dashassets/./images/edit.png') }}"alt="Edit"></td>
-                          <td><img src="{{ asset('dashassets/./images/delete.png') }}" alt="Delete"></td>
-                        </tr>
-                        <tr>
-                          <td>First Name and Last Name</td>
-                          <td>mail@example.com</td>
-                          <td><img src="{{ asset('dashassets/./images/edit.png') }}" alt="Edit"></td>
-                          <td><img src="{{ asset('dashassets/./images/delete.png') }}" alt="Delete"></td>
-                        </tr>
-                        
+                          <td>{{$message->name}}</td>
+                          <td>{{$message->email}}</td>
+                          <td>
+                          <a href="{{ route('showMsg', $message->id) }}">
+                              <img src="{{ asset('dashassets/images/edit.png') }}" alt="Edit">
+                         </a>
+                          </td> 
+                          <td>
+                          <form action="{{ route('deletemsg', $message->id) }}" method="POST" style="display:inline;">
+                                  @csrf
+                                  @method('DELETE')
+                                  <button type="submit" style="border:  none; background: none; padding: 0;" value="Delete" onclick="return confirm('Are you sure you want to delete this message?')"  >
+                                      <img src="{{ asset('dashassets/images/delete.png') }}" alt="Delete">
+                                  </button>                     
+                             </td>
+                                </tr>
+                        @endforeach
                       </tbody>
                     </table>
                   </div>

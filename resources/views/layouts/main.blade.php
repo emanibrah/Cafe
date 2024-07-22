@@ -9,10 +9,10 @@
         @include('includes.siteheader')
         <div class="tm-right">
         <main class="tm-main">
-          
-             @yield('content')
+        <div id="drink" class="tm-page-content">
 
-             </main>
+             @yield('content')
+        </main>
       </div>    
     </div>
         <!-- Background video -->
