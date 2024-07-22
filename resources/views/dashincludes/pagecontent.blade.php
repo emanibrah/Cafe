@@ -57,85 +57,16 @@
 
 
                       <tbody>
+                      @foreach($users as $user)
                         <tr>
-                          <td>1 Jan 2023</td>
-                          <td>Tony Adam</td>
-                          <td>tony2023</td>
-                          <td>tony@gmail.com</td>
-                          <td>Yes</td>
-                          <td><img src="{{ asset('dashassets/./images/edit.png') }}" alt="Edit"></td>
-                        </tr>
-                        <tr>
-                          <td>1 Jan 2023</td>
-                          <td>Tony Adam</td>
-                          <td>tony2023</td>
-                          <td>tony@gmail.com</td>
-                          <td>Yes</td>
-                          <td><img src="{{ asset('dashassets/./images/edit.png') }}" alt="Edit"></td>
-                        </tr>
-                        <tr>
-                          <td>1 Jan 2023</td>
-                          <td>Tony Adam</td>
-                          <td>tony2023</td>
-                          <td>tony@gmail.com</td>
-                          <td>Yes</td>
-                          <td><img src="{{ asset('dashassets/./images/edit.png') }}" alt="Edit"></td>
-                        </tr>
-                        <tr>
-                          <td>1 Jan 2023</td>
-                          <td>Tony Adam</td>
-                          <td>tony2023</td>
-                          <td>tony@gmail.com</td>
-                          <td>Yes</td>
-                          <td><img src="{{ asset('dashassets/./images/edit.png') }}" alt="Edit"></td>
-                        </tr>
-                        <tr>
-                          <td>1 Jan 2023</td>
-                          <td>Tony Adam</td>
-                          <td>tony2023</td>
-                          <td>tony@gmail.com</td>
-                          <td>Yes</td>
-                          <td><img src="{{ asset('dashassets/./images/edit.png') }}" alt="Edit"></td>
-                        </tr>
-                        <tr>
-                          <td>1 Jan 2023</td>
-                          <td>Tony Adam</td>
-                          <td>tony2023</td>
-                          <td>tony@gmail.com</td>
-                          <td>Yes</td>
-                          <td><img src="{{ asset('dashassets/./images/edit.png') }}" alt="Edit"></td>
-                        </tr>
-                        <tr>
-                          <td>1 Jan 2023</td>
-                          <td>Tony Adam</td>
-                          <td>tony2023</td>
-                          <td>tony@gmail.com</td>
-                          <td>Yes</td>
-                          <td><img src="{{ asset('dashassets/./images/edit.png') }}" alt="Edit"></td>
-                        </tr>
-                        <tr>
-                          <td>1 Jan 2023</td>
-                          <td>Tony Adam</td>
-                          <td>tony2023</td>
-                          <td>tony@gmail.com</td>
-                          <td>Yes</td>
-                          <td><img src="{{ asset('dashassets/./images/edit.png') }}" alt="Edit"></td>
-                        </tr>
-                        <tr>
-                          <td>1 Jan 2023</td>
-                          <td>Tony Adam</td>
-                          <td>tony2023</td>
-                          <td>tony@gmail.com</td>
-                          <td>Yes</td>
-                          <td><img src="{{ asset('dashassets/./images/edit.png') }}" alt="Edit"></td>
-                        </tr>
-                        <tr>
-                          <td>1 Jan 2023</td>
-                          <td>Tony Adam</td>
-                          <td>tony2023</td>
-                          <td>tony@gmail.com</td>
-                          <td>Yes</td>
-                          <td><img src="{{ asset('dashassets/./images/edit.png') }}" alt="Edit"></td>
+                          <td>{{ $user->created_at->format('d M Y') }}</td>
+                          <td>{{$user->name}}</td>
+                          <td>{{$user->name}}</td>
+                          <td>{{$user->email}}</td>
+                          <td>{{ $user->publish ? 'No' : 'Yes' }}</td>
+                          <td><a href="{{ route('edituser', $user->id) }}">
+                              <img src="{{ asset('dashassets/images/edit.png') }}" alt="Edit"></a>
+                         </td>
                         </tr>
                         
                       </tbody>

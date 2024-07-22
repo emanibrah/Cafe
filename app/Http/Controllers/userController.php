@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class userController extends Controller
 {
@@ -11,7 +12,8 @@ class userController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::get();
+        return view ('userlist', compact ('users'));
     }
 
     /**
@@ -19,7 +21,8 @@ class userController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::get();
+        return view('adduser ', compact( 'users'));
     }
 
     /**
@@ -27,7 +30,16 @@ class userController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data= $request->validate([
+            'name'=>'required|string|max:50',
+            'username' => 'required|string|max:15', 
+            'email'=>'required',  
+            'password'=>'required|min:8', 
+        ]);
+        $data['active'] = isset($request-> active);
+        $data['password'] = Hash::make($data['password']);
+        User::create ($data);
+        return redirect('userlist');
     }
 
     /**
@@ -43,15 +55,26 @@ class userController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $users = User::findOrFail($id);
+        return view('edituser', compact('users'));
     }
+    
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->validate([
+            'name'=>'required|string|max:50',
+            'username' => 'required|string|max:15', 
+            'email'=>'required',  
+            'password'=>'required|min:8', 
+        ]);
+        $data['active'] = isset($request-> active);
+        $data['password'] = Hash::make($data['password']);
+        User::where('id', $id)->update($data);
+        return redirect('userlist');
     }
 
     /**

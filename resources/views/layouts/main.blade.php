@@ -5,25 +5,18 @@
 </head>
 <body>
   
-       <!-- Site Header -->
-       @include('includes.siteheader')
+        <!-- Site Header -->
+        @include('includes.siteheader')
+        <div class="tm-right">
+        <main class="tm-main">
+          
+             @yield('content')
 
-
-       <!-- Drink Menu Page -->
-       @include('includes.drinkmenu')
-
-
-        <!-- About Us Page -->
-          @include('includes.about')
-
-          <!-- Special Items Page -->
-        @include('includes.special')
-
-            <!-- Contact Page -->
-        @include('includes.contect')
-
-          <!-- Background video -->
-          @include('includes.video')
+             </main>
+      </div>    
+    </div>
+        <!-- Background video -->
+        @include('includes.video')
 
 
   </script>
