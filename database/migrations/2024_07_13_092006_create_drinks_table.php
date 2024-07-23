@@ -19,7 +19,7 @@ return new class extends Migration
             $table->boolean('publish');
             $table->boolean('special');
             $table->string('image', 100);
-            $table->foreignId('category_id')->constrained('categories')->onDelete('restrict');
+            $table->foreignId('category_id')->constrained('categories');
             $table->softDeletes();
             $table->timestamps();
         });

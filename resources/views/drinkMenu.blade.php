@@ -16,7 +16,7 @@
     </ul>
   </nav>
 
-  @foreach($categories as $category)
+  @foreach($categories as $category) 
   <div id="{{ strtolower($category->cate_name) }}" class="tm-tab-content">
     <div class="tm-list">
       @foreach($drinks->where('category_id', $category->id) as $drink)

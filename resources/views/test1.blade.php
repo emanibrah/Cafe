@@ -5,8 +5,7 @@
 </head>
 <body>
   
-       <!-- Site Header -->
-       <div class="tm-container">
+<div class="tm-container">
     <div class="tm-row">
       <!-- Site Header -->
       <div class="tm-left">
@@ -45,24 +44,31 @@
           </nav>
         </div>        
       </div>
-
-       <!-- Drink Menu Page -->
-      @include('includes.drinkmenu')
-
-
-        <!-- About Us Page -->
-           @include('includes.about')
-
-         >   <!-- Special Items Page -->
-         @include('includes.special')
-
-            <!-- Contact Page -->
-        @include('includes.contect') 
-
-          <!-- Background video -->
-          @include('includes.video')
+      <div class="tm-right">
+        <main class="tm-main">
+           <!-- Drink Menu Page -->
+  @include('includes.drinkmenu')
 
 
+<!-- About Us Page -->
+   @include('includes.about')
+
+ >   <!-- Special Items Page -->
+ @include('includes.special')
+
+    <!-- Contact Page -->
+@include('includes.contect') 
+
+</main>
+      </div>    
+    </div>
+
+  <!-- Background video -->
+  @include('includes.video')
+
+
+       
+     
   </script>
 </body>
 </html>

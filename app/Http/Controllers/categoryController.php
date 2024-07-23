@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Drink;
 use App\Models\Category;
+
+
 use Illuminate\Http\Request;
 
 class categoryController extends Controller
@@ -71,22 +74,38 @@ class categoryController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
+
+    
     {
-        // قم بالبحث عن الفئة بناءً على الـ ID وحذفها بشكل دائم
-        $category = Category::find($id);
-        
-        if (!$category) {
-            return redirect('cate')->with('error', 'Category not found');
+        $categories = Category::findOrFail($id);
+        $drinkCount = Drink::where('category_id', $categories->id)->count();
+
+        if ($drinkCount > 0) {
+            return redirect('categories')->with('error', 'Cannot delete category as it contains drinks.');
         }
-        
-        // تأكد من أن الفئة ليست لها علاقات قبل حذفها بشكل دائم
-        if ($category->drinks()->count() > 0) {
-            return redirect('cate')->with('error', 'Category has related drinks, cannot be deleted');
-        }
-    
-        $category->forceDelete();
-    
-        return redirect('cate')->with('success', 'Category deleted successfully');
+
+        // If no cars associated, delete the category
+        $categories->forceDelete();
+        return redirect('categories')->with('success', 'Category deleted successfully.');
     }
+
+
+
+        // قم بالبحث عن الفئة بناءً على الـ ID وحذفها بشكل دائم
+    //     $category = Category::find($id);
+        
+    //     if (!$category) {
+    //         return redirect('cate')->with('error', 'Category not found');
+    //     }
+        
+    //     // تأكد من أن الفئة ليست لها علاقات قبل حذفها بشكل دائم
+    //     if ($category->drinks()->count() > 0) {
+    //         return redirect('cate')->with('error', 'Category has related drinks, cannot be deleted');
+    //     }
+    
+    //     $category->forceDelete();
+    
+    //     return redirect('cate')->with('success', 'Category deleted successfully');
+    // }
     
 }

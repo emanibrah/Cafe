@@ -7,6 +7,7 @@ use App\Http\Controllers\DrinkController;
 use App\Http\Controllers\categoryController;
 use App\Http\Controllers\messageController;
 use App\Http\Controllers\pageController;
+use App\Http\Controllers\frontpController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -22,55 +23,61 @@ Route::get('test', function () {
 
 
 Route::get('add', function () {
-    return view('contectus');
+    return view('test1');
 });
-
+Auth::routes(['verify'=>true]);
 //users
-        Route::get('userlist', [userController::class, 'index'])->name('userlist');
-        Route::get('adduser', [userController::class, 'create'])->name('adduser');
-        Route::post('insertuser', [userController::class, 'store'])->name('insertuser');
-        Route::get('edituser/{id}', [userController::class, 'edit'])->name('edituser');
-        Route::put('updateuser/{id}', [userController::class, 'update'])->name('updateuser');
+        Route::get('userlist', [userController::class, 'index'])->middleware('verified')->name('userlist');
+        Route::get('adduser', [userController::class, 'create'])->middleware('verified')->name('adduser');
+        Route::post('insertuser', [userController::class, 'store'])->middleware('verified')->name('insertuser');
+        Route::get('edituser/{id}', [userController::class, 'edit'])->middleware('verified')->name('edituser');
+        Route::put('updateuser/{id}', [userController::class, 'update'])->middleware('verified')->name('updateuser');
 
 
 //Drinks
-        Route::get('drinkList', [DrinkController::class, 'index'])->name('drinkList');
-        Route::get('drinks', [DrinkController::class, 'create'])->name('drinks');
-        Route::post('insertdrink', [DrinkController::class, 'store'])->name('insertdrink');
-        Route::get('editDrink/{id}', [DrinkController::class, 'edit'])->name('editDrink');
-        Route::put('updateDrink/{id}', [DrinkController::class, 'update'])->name('updateDrink');
-        Route::get('showclients/{id}', [DrinkController::class, 'show'])->name('showclients');
+        Route::get('drinkList', [DrinkController::class, 'index'])->middleware('verified')->name('drinkList');
+        Route::get('drinks', [DrinkController::class, 'create'])->middleware('verified')->name('drinks');
+        Route::post('insertdrink', [DrinkController::class, 'store'])->middleware('verified')->name('insertdrink');
+        Route::get('editDrink/{id}', [DrinkController::class, 'edit'])->middleware('verified')->name('editDrink');
+        Route::put('updateDrink/{id}', [DrinkController::class, 'update'])->middleware('verified')->name('updateDrink');
+        Route::get('showclients/{id}', [DrinkController::class, 'show'])->middleware('verified')->name('showclients');
         Route::delete('deleteDrink/{id}', [DrinkController::class, 'destroy'])->name('deleteDrink');
 
 //Category
-        Route::get('categories',[categoryController::class, 'index'])->name('categories');
-        Route::get('addcate',[categoryController::class, 'create'])->name('addcate');
-        Route::post('insertcate', [categoryController::class, 'store'])->name('insertcate');
-        Route::get('editcate/{id}', [categoryController::class, 'edit'])->name('editcate');
-        Route::put('updatecate/{id}', [categoryController::class, 'update'])->name('updatecate');
-        Route::get('showcate/{id}', [categoryController::class, 'show'])->name('showcate');
+        Route::get('categories',[categoryController::class, 'index'])->middleware('verified')->name('categories');
+        Route::get('addcate',[categoryController::class, 'create'])->middleware('verified')->name('addcate');
+        Route::post('insertcate', [categoryController::class, 'store'])->middleware('verified')->name('insertcate');
+        Route::get('editcate/{id}', [categoryController::class, 'edit'])->middleware('verified')->name('editcate');
+        Route::put('updatecate/{id}', [categoryController::class, 'update'])->middleware('verified')->name('updatecate');
+        Route::get('showcate/{id}', [categoryController::class, 'show'])->middleware('verified')->name('showcate');
         Route::delete('deletecate/{id}', [categoryController::class, 'destroy'])->name('deletecate');
 
 
 //Messages
-        Route::get('message',[messageController::class, 'index'])->name('message');
-        Route::post('uscontact', [messageController::class, 'store'])->name('uscontact');
-        // Route::get('editDrink/{id}', [DrinkController::class, 'edit'])->name('editDrink');
-        // Route::put('updateDrink/{id}', [DrinkController::class, 'update'])->name('updateDrink');
-        Route::get('showMsg/{id}', [messageController::class, 'show'])->name('showMsg');
+        Route::get('message',[messageController::class, 'index'])->middleware('verified')->name('message');
+        Route::post('uscontact', [messageController::class, 'store'])->middleware('verified')->name('uscontact');
+        Route::get('showMsg/{id}', [messageController::class, 'show'])->middleware('verified')->name('showMsg');
         Route::delete('deletemsg/{id}', [messageController::class, 'destroy'])->name('deletemsg');
 
 
 //pages
         Route::get('drinkMenu', [pageController::class, 'index'])->name('drinkMenu');
         Route::get('drink/category/{categoryId}', [pageController::class, 'getDrinksByCategory'])->name('drink.category');
-
         Route::get('aboutus', [pageController::class, 'about'])->name('aboutus');
         Route::get('us', [PageController::class, 'contact'])->name('us');
         Route::get('specialDrink', [PageController::class, 'special'])->name('specialDrink');
 
 
 
-Auth::routes();
+        Route::get('menu', [frontpController::class, 'index'])->name('menu');
+        Route::get('drink/category/{categoryId}', [frontpController::class, 'getDrinksByCategory'])->name('drink.category');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+        Route::get('aboutus', [pageController::class, 'about'])->name('aboutus');
+        Route::get('us', [PageController::class, 'contact'])->name('us');
+        Route::get('specialDrink', [PageController::class, 'special'])->name('specialDrink');
+
+
+//         Route::post('/logout', [App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'destroy'])
+//       ->name('logout');
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified')->name('home');

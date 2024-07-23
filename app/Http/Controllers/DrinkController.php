@@ -42,22 +42,13 @@ class DrinkController extends Controller
             'category_id'=>'required', 
                 ]);
        // return dd($request->all());
-        // 
-            // 'price'=>'required', 
-            // 'image' => 'required',
-            // 'category_id'=>'required', 
-       
+        
 
         $fileName = $this->uploadFile($request->image, 'assets/img');    
         $data['image'] = $fileName;
-        // $data['publish'] = isset($request-> active);
-        // $data['special'] = isset($request-> special);
-        // $data['puplish'] = $request->has('puplish'); 
-        // $data['special'] = $request->has('special');
-        //return dd($request->all());
-        $data['publish'] = $request->has('active'); // This checks if 'active' checkbox is checked
-        $data['special'] = $request->has('special'); // This checks if 'special' checkbox is checked
 
+        $data['publish'] = $request->has('active'); 
+        $data['special'] = $request->has('special'); 
         Drink::create ($data);
         return redirect('drinkList');
     

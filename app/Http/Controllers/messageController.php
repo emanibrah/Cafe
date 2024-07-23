@@ -15,7 +15,9 @@ class messageController extends Controller
     public function index()
     {
         $messages = Message::get();
-        return view ('messages', compact ('messages'));
+        $messages = Message::get();
+        $unreadMessages = Message::where('readmsg', false)->get();
+        return view ('messages', compact ('messages','unreadMessages'));
     }
 
     /**
@@ -37,6 +39,8 @@ class messageController extends Controller
             'message' => 'required|string',
         ]);
         Message::create ($data);
+        $unreadMessageCount = Message::where('readmsg', false)->count();
+        Session::put('unreadMessageCount', $unreadMessageCount);
         Mail::to('eman@email.com')->send(
             new ContactMail($data));
         return redirect('us')->with('success', 'Message sent successfully!');

@@ -10,7 +10,7 @@
           <nav class="tm-site-nav">
             <ul class="tm-site-nav-ul">
               <li class="tm-page-nav-item">
-              <a href="{{ route('drinkMenu') }}" class="tm-page-link {{request()->is('drinkMenu')? "active":""}}">
+                <a href="#drink" class="tm-page-link active">
                   <i class="fas fa-mug-hot tm-page-link-icon"></i>
                   <span>Drink Menu</span>
                 </a>

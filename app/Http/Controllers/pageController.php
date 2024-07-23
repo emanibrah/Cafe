@@ -12,6 +12,25 @@ class pageController extends Controller
 
 {
     
+//     public function index()
+// {
+//     $categories = Category::take(3)->get();
+//     $drinks = Drink::get(); 
+
+//     return view('drinkMenu', compact('categories', 'drinks'));
+// }
+
+// public function getDrinksByCategory($categoryId)
+// {
+//     $category = Category::findOrFail($categoryId);
+//     $drinks = $category->Drinkes()->get(); // تحميل المشروبات التي تنتمي للفئة المحددة
+
+//     $categories = Category::take(3)->get(); // تحميل الفئات مرة أخرى لعرضها في القائمة الجانبية
+    
+//     return view('drinkMenu', compact('category', 'drinks'));
+// }
+
+
    
         public function index()
         {
@@ -22,10 +41,17 @@ class pageController extends Controller
         }
     
 
+    //     public function getDrinksByCategory($categoryId)
+    // {
+    //     $category = Category::findOrFail($categoryId);
+    //     return view('drinkMenu', compact('category'));
+    // }
+
+
     // public function getDrinksByCategory($categoryId)
     // {
     //     $category = Category::findOrFail($Id);
-        //    $categories = Category::with('cars')->get();
+    //        $categories = Category::with('drinks')->get();
     //     return view('drinkMenu', compact('category'));
     // }
 
