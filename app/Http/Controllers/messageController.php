@@ -15,8 +15,7 @@ class messageController extends Controller
     public function index()
     {
         $messages = Message::get();
-        $messages = Message::get();
-        $unreadMessages = Message::where('readmsg', false)->get();
+        $unreadMessages = Message::where('readmsg', false)->take(6)->get();
         return view ('messages', compact ('messages','unreadMessages'));
     }
 
@@ -53,9 +52,10 @@ class messageController extends Controller
      */
     public function show(string $id)
     {
+
+        $unreadMessages = Message::where('readmsg', false)->take(6)->get();
         $messages = Message::findOrFail($id);
-       
-        return view('showMsg', compact('messages'));
+        return view('showMsg', compact('messages','unreadMessages'));
     }
    
 

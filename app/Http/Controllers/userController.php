@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -12,8 +13,10 @@ class userController extends Controller
      */
     public function index()
     {
+        $unreadMessages = Message::where('readmsg', false)->take(6)->get();
+        $messages = Message::get();
         $users = User::get();
-        return view ('userlist', compact ('users'));
+        return view ('userlist', compact ('users','messages','unreadMessages'));
     }
 
     /**
@@ -21,8 +24,10 @@ class userController extends Controller
      */
     public function create()
     {
+        $messages = Message::get();
+        $unreadMessages = Message::where('readmsg', false)->take(6)->get(); 
         $users = User::get();
-        return view('adduser ', compact( 'users'));
+        return view('adduser ', compact( 'users','messages','unreadMessages'));
     }
 
     /**
@@ -55,8 +60,10 @@ class userController extends Controller
      */
     public function edit(string $id)
     {
+        $messages = Message::get();
+        $unreadMessages = Message::where('readmsg', false)->take(6)->get();
         $users = User::findOrFail($id);
-        return view('edituser', compact('users'));
+        return view('edituser', compact('users','messages','unreadMessages'));
     }
     
 

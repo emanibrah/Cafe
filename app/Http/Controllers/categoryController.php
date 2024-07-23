@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Drink;
 use App\Models\Category;
+use App\Models\Message;
 
 
 use Illuminate\Http\Request;
@@ -15,7 +16,9 @@ class categoryController extends Controller
     public function index()
     {
         $categories= Category::get();
-        return view('cate', compact('categories'));
+        $messages = Message::get();
+        $unreadMessages = Message::where('readmsg', false)->take(6)->get();
+        return view('cate', compact('categories','messages','unreadMessages'));
     }
 
     /**
@@ -23,7 +26,9 @@ class categoryController extends Controller
      */
     public function create()
     {
-        return view('addcate');
+        $messages = Message::get();
+        $unreadMessages = Message::where('readmsg', false)->take(6)->get();
+        return view('addcate',compact('messages','unreadMessages'));
 
     }
 
@@ -52,8 +57,11 @@ class categoryController extends Controller
      */
     public function edit(string $id)
     {
+
+        $messages = Message::get();
+        $unreadMessages = Message::where('readmsg', false)->take(6)->get();
         $categories= Category::findOrFail($id);
-        return view('editcate', compact( 'categories'));
+        return view('editcate', compact( 'categories','messages','unreadMessages'));
     }
     
 

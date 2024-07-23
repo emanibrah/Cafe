@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Models\Drink;
 use App\Models\Category;
 use App\Traits\UploadFile;
+use App\Models\Message;
 
 class DrinkController extends Controller
 {
@@ -15,8 +16,10 @@ class DrinkController extends Controller
      */
     public function index()
     {
+        $messages = Message::get();
+        $unreadMessages = Message::where('readmsg', false)->take(6)->get();
         $drinks= Drink::get();
-        return view('drinkList', compact('drinks'));
+        return view('drinkList', compact('drinks','messages','unreadMessages'));
     }
 
     /**
@@ -24,8 +27,10 @@ class DrinkController extends Controller
      */
     public function create()
     {
+        $messages = Message::get();
+        $unreadMessages = Message::where('readmsg', false)->take(6)->get();
         $categories =Category::get();
-        return view('addDrink', compact('categories'));
+        return view('addDrink', compact('categories','messages','unreadMessages'));
     }
 
     /**
@@ -69,9 +74,11 @@ class DrinkController extends Controller
      */
     public function edit(string $id)
     {
+        $messages = Message::get();
+        $unreadMessages = Message::where('readmsg', false)->take(6)->get();
         $categories = Category::get();
         $drinks= Drink::findOrFail($id);
-        return view('editDrink', compact('drinks', 'categories'));
+        return view('editDrink', compact('drinks', 'categories','messages','unreadMessages'));
     }
 
     /**

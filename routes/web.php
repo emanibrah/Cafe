@@ -9,9 +9,7 @@ use App\Http\Controllers\messageController;
 use App\Http\Controllers\pageController;
 use App\Http\Controllers\frontpController;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+
 
 Route::get('test', function () {
     return view('test1');
@@ -20,12 +18,26 @@ Route::get('test', function () {
 // // Route::get('cat', function () {
 // //     return view('cate');
 // // });
+Auth::routes(['verify'=>true]);
+
+//users routes
+Route::middleware(['auth', 'access-level:user'])->group(function () {
+  
+        Route::get('/welocme', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified')->name('welcome');
+    });
+      
+    // admin routes
+    Route::middleware(['auth', 'access-level:admin'])->group(function () {
+      
+        Route::get('/admin/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->middleware('verified')->name('admin.dashboard');
+    });
+    
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified')->name('home');
 
 
 Route::get('add', function () {
     return view('test1');
 });
-Auth::routes(['verify'=>true]);
 //users
         Route::get('userlist', [userController::class, 'index'])->middleware('verified')->name('userlist');
         Route::get('adduser', [userController::class, 'create'])->middleware('verified')->name('adduser');
@@ -80,4 +92,3 @@ Auth::routes(['verify'=>true]);
 //         Route::post('/logout', [App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'destroy'])
 //       ->name('logout');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified')->name('home');

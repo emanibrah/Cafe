@@ -10,7 +10,7 @@
     <ul>
       @foreach($categories as $category)
       <li>
-        <a href="#" class="tm-tab-link" data-id="{{ $category->cate_name }}">{{ $category->cate_name }}</a>
+        <a href="#{{ $category->id }}" class="tm-tab-link" data-id="{{ $category->cate_name }}">{{ $category->cate_name }}</a>
       </li>
       @endforeach
     </ul>
@@ -36,3 +36,5 @@
           
 
 @endsection
+
+
