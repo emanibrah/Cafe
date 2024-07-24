@@ -102,9 +102,7 @@
         <div class="col-md-6 col-sm-6">
             <select class="form-control" name="category_id" id="">
                 <option value="">Select Category</option>
-				<!-- @foreach($categories as $category)
-			<option value="{{ $category->id }}" @selected(old('id') == $category->category_id)>{{ $category->cate_name }}</option>
-						@endforeach -->
+				
                 @foreach($categories as $category)
                     <option value="{{ $category->id }}" {{ $category->id == $drinks->category_id ? 'selected' : '' }}>{{ $category->cate_name }}</option>
                 @endforeach

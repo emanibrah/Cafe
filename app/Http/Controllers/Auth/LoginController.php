@@ -50,7 +50,6 @@ class LoginController extends Controller
     {
        # Validate the form data
         $request->validate([
-            //'email' => 'required|email',
             'name' => 'required|string|max:255',
             'password' => 'required|string|min:8',
             

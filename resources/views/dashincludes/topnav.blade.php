@@ -25,7 +25,7 @@
                   <li role="presentation" class="nav-item dropdown open">
                     <a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1" data-toggle="dropdown" aria-expanded="false">
                       <i class="fa fa-envelope-o"></i>
-                      <span id="" class="badge bg-green">{{ session('unreadMessageCount') }}</span>
+                      <span id="" class="badge bg-green">{{$unreadMessages->count()}}</span>
                     </a>
                     <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
                       @foreach($unreadMessages as $message)

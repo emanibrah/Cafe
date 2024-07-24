@@ -32,7 +32,7 @@ Route::middleware(['auth', 'access-level:user'])->group(function () {
         Route::get('/admin/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->middleware('verified')->name('admin.dashboard');
     });
     
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified')->name('home');
+     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified')->name('home');
 
 
 Route::get('add', function () {

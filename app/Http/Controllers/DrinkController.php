@@ -97,8 +97,8 @@ class DrinkController extends Controller
                
         $fileName = $this->uploadFile($request->image, 'assets/img');    
         $data['image'] = $fileName;
-        $data['publish'] = $request->has('active'); // This checks if 'active' checkbox is checked
-        $data['special'] = $request->has('special'); // This checks if 'special' checkbox is checked
+        $data['publish'] = $request->has('active'); 
+        $data['special'] = $request->has('special'); 
 
        
         //return dd($request->all());
